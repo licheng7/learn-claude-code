@@ -43,9 +43,18 @@ WORKDIR = Path.cwd()
 client = Anthropic(base_url=os.getenv("ANTHROPIC_BASE_URL"))
 MODEL = os.environ["MODEL_ID"]
 
-SYSTEM = f"""You are a coding agent at {WORKDIR}.
-Use the todo tool to plan multi-step tasks. Mark in_progress before starting, completed when done.
-Prefer tools over prose."""
+"""
+你是 {WORKDIR} 目录下的一名编码代理。
+使用待办事项工具来规划多步骤任务。开始前标记为 in_progress（进行中），完成后标记为 completed（已完成）。
+优先使用工具，而非文字描述。
+"""
+# SYSTEM = f"""You are a coding agent at {WORKDIR}.
+# Use the todo tool to plan multi-step tasks. Mark in_progress before starting, completed when done.
+# Prefer tools over prose."""
+SYSTEM = f"""你是 {WORKDIR} 目录下的一名编码代理。
+处理复杂任务时，首先使用待办事项工具（todo tool）来规划多步骤任务。
+开始前标记为 in_progress（进行中），完成后标记为 completed（已完成）。
+优先使用工具，而非文字描述。"""
 
 
 # -- TodoManager: structured state the LLM writes to --
@@ -54,6 +63,7 @@ class TodoManager:
         self.items = []
 
     def update(self, items: list) -> str:
+        print(f"============TODO update: {items}")
         if len(items) > 20:
             raise ValueError("Max 20 todos allowed")
         validated = []

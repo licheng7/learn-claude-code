@@ -71,6 +71,7 @@ def agent_loop(messages: list):
             model=MODEL, system=SYSTEM, messages=messages,
             tools=TOOLS, max_tokens=8000,
         )
+        print(f"\033[33m{response}\033[0m")
         # Append assistant turn
         messages.append({"role": "assistant", "content": response.content})
         # If the model didn't call a tool, we're done
@@ -103,5 +104,5 @@ if __name__ == "__main__":
         if isinstance(response_content, list):
             for block in response_content:
                 if hasattr(block, "text"):
-                    print(block.text)
+                    print(f"\033[33m橘橘橘\033[0m {block.text}") 
         print()

@@ -39,7 +39,9 @@ WORKDIR = Path.cwd()
 client = Anthropic(base_url=os.getenv("ANTHROPIC_BASE_URL"))
 MODEL = os.environ["MODEL_ID"]
 
+# 你是{WORKDIR}目录下的一名编码代理。使用任务工具来委派探索工作或子任务。
 SYSTEM = f"You are a coding agent at {WORKDIR}. Use the task tool to delegate exploration or subtasks."
+# 你是{WORKDIR}目录下的一名编码子代理。完成给定的任务，然后总结你的发现。
 SUBAGENT_SYSTEM = f"You are a coding subagent at {WORKDIR}. Complete the given task, then summarize your findings."
 
 
