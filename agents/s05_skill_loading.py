@@ -107,6 +107,8 @@ class SkillLoader:
 SKILL_LOADER = SkillLoader(SKILLS_DIR)
 
 # Layer 1: skill metadata injected into system prompt
+# 你是 {WORKDIR} 目录下的一名编码代理。
+# 在处理不熟悉的主题之前，请使用 load_skill 来获取专业知识。
 SYSTEM = f"""You are a coding agent at {WORKDIR}.
 Use load_skill to access specialized knowledge before tackling unfamiliar topics.
 

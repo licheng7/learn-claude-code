@@ -63,7 +63,7 @@ def estimate_tokens(messages: list) -> int:
     """Rough token count: ~4 chars per token."""
     return len(str(messages)) // 4
 
-
+# 用占位符替换旧的工具结果（这是第一种，最简单的压缩方式）
 # -- Layer 1: micro_compact - replace old tool results with placeholders --
 def micro_compact(messages: list) -> list:
     # Collect (msg_index, part_index, tool_result_dict) for all tool_result entries
@@ -93,7 +93,7 @@ def micro_compact(messages: list) -> list:
             result["content"] = f"[Previous: used {tool_name}]"
     return messages
 
-
+# 保存记录，生成摘要，替换消息
 # -- Layer 2: auto_compact - save transcript, summarize, replace messages --
 def auto_compact(messages: list) -> list:
     # Save full transcript to disk

@@ -133,6 +133,7 @@ def run_subagent(prompt: str) -> str:
                 results.append({"type": "tool_result", "tool_use_id": block.id, "content": str(output)[:50000]})
         sub_messages.append({"role": "user", "content": results})
     # Only the final text returns to the parent -- child context is discarded
+    # 只有最终文本会返回给父代理 —— 子代理的上下文会被丢弃
     return "".join(b.text for b in response.content if hasattr(b, "text")) or "(no summary)"
 
 
